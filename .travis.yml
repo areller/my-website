@@ -20,3 +20,13 @@ deploy:
   name: "areller"
   on:
     branch: master
+
+after_success: |
+    git clone https://areller:$GITHUB_TOKEN@github.com/areller/areller.github.io
+    cd areller.github.io
+    git checkout --orphan master
+    rm -rf .
+    mv ../public/* ./
+    git add -f --ignore-errors --all
+    git -c user.name='travis' -c user.email='travis' commit -m init
+    git push -f -q https://areller:$GITHUB_TOKEN@github.com/areller/areller.github.io master
