@@ -1,9 +1,9 @@
-language: go
-go:
-  - master
+os: linux
 
 install:
-  - go get github.com/gohugoio/hugo
+  - wget https://github.com/gohugoio/hugo/releases/download/v0.41/hugo_0.41_Linux-64bit.tar.gz
+  - tar -xvf hugo_0.41_Linux-64bit.tar.gz
+  - sudo mv hugo /usr/bin
 
 script:
   - hugo
