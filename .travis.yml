@@ -1,9 +1,12 @@
 os: linux
 
 install:
+  - mkdir hugo_build
   - wget https://github.com/gohugoio/hugo/releases/download/v0.41/hugo_0.41_Linux-64bit.tar.gz
-  - tar -xvf hugo_0.41_Linux-64bit.tar.gz
-  - sudo mv hugo /usr/bin
+  - tar -xvf hugo_0.41_Linux-64bit.tar.gz -C ./hugo_build
+  - sudo mv ./hugo_build/hugo /usr/bin
+  - rm -rf ./hugo_build
+  - rm -rf hugo_0.41_Linux-64bit.tar.gz
 
 script:
   - hugo
@@ -14,5 +17,6 @@ deploy:
   target_branch: master
   provider: pages
   github_token: $GITHUB_TOKEN
+  name: "areller"
   on:
     branch: master
